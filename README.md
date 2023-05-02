@@ -8,8 +8,11 @@ Count-Loc is a PowerShell module that uses the git stat command to count the lin
 - Do stat by specific author name or by default option of last commit author
 - Display the results in console
 - command run under Windows and Linux (tested on Ubuntu 20.04 with bash and PowerShell 7.1.3))
-  TODO: Export the results to a CSV file or a HTML report
-  TODO: use Count-Loc in github actions to provide artefacts and possible update readme on trigger events
+
+## TODO
+
+- TODO: _Export the results to a CSV file or a HTML report_
+- TODO: _use Count-Loc in github actions to provide artefacts and possible update readme on trigger events_
 
 ## Installation
 
