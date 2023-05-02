@@ -102,4 +102,3 @@ it is not a req, but also a good idea to have module posh-git installed. this mo
 ## Author
 
 **Uyriq**
-Twitter: [@uniqabble](https://twitter.com/uniqabble)
