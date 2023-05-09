@@ -3,7 +3,7 @@ function Measure-Loc {
     .SYNOPSIS
     Using of git stat to count LOC total, inserted, deleted and average
     .DESCRIPTION
-    Helper named Count-Loc to count LOC of git commits with git stat command on the fly with varios options      
+    Helper Measure-Loc (alias Count-Loc) to count LOC of git commits with git stat command on the fly with varios options      
     .PARAMETER NumberDays
      The number of days to count LOC from
     .PARAMETER Author
@@ -128,5 +128,4 @@ function Measure-Loc {
     Write-Output 'Total Lines of code:'  
     return ($LinesIns + $LinesDel)    
 } 
-Set-Alias -Name Count-Loc -Value Measure-Loc
-Export-ModuleMember  -Function Measure-Loc 
+# want to set alias for Measure-Loc to Count-Loc 

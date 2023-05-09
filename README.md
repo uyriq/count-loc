@@ -7,7 +7,7 @@ Count-Loc is a PowerShell module that uses the git stat command to count the lin
 - Count LOC for a given number of days, a specific date range, or a custom period
 - Do stat by specific author name or by default option of last commit author
 - Display the results in console
-- command run under Windows and Linux (tested on Ubuntu 20.04 with bash and PowerShell 7.1.3))
+- works under Windows and Linux (tested on Ubuntu 20.04 with bash and PowerShell 7.1.3))
 
 ## TODO
 
@@ -35,7 +35,8 @@ it should return something like this
 ```text
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
-Function        Count-Loc                                          1.0.5      count-loc
+Alias           Count-Loc                                          1.0.6      count-loc
+Function        Measure-Loc                                        1.0.6      count-loc
 ```
 
 To update Count-Loc to the latest version, run the following command:
