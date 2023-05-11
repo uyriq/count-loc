@@ -73,12 +73,12 @@ function Measure-Loc {
    
     $isWindowsOS = $env:OS -match 'Windows'
     $isBash = $env:SHELL -contains '/bin/bash'
-    (Invoke-Expression "git --version") -match "git" 
-    if ($isWindowsOS ) { $isGitInstalled = (Invoke-Expression "git --version") -match "git" }
-    if ($isBash -or $isLinux) { $isGitInstalled = (Invoke-Expression "git --version") -match "git" }
+    $isGitInstalled = (Invoke-Expression "git --version") -match "git" 
     if ($isGitInstalled -eq $false) { 
-        Write-Output 'git is not installed, please install git from https://git-scm.com/download/win'
-        throw "git is not installed, please install git from https://git-scm.com/download/win before using Count-Loc"
+        if ($isWindowsOS) { $url = 'https://git-scm.com/download/win' }
+        if ($isBash) { $url = 'https://git-scm.com/download/linux' }
+        Write-Output "git is not installed, please install git from $url"
+        throw "git is not installed, please install git from $url before using Count-Loc"
     }
 
     if ($Help) { 
@@ -128,4 +128,3 @@ function Measure-Loc {
     Write-Output 'Total Lines of code:'  
     return ($LinesIns + $LinesDel)    
 } 
-# want to set alias for Measure-Loc to Count-Loc 

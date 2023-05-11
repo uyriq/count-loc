@@ -1,5 +1,7 @@
 # Count-Loc: A PowerShell Module to Count Lines of Code in Git Commits
 
+![PowerShell Gallery](https://img.shields.io/powershellgallery/p/count-loc.svg)
+
 Count-Loc is a PowerShell module that uses the git stat command to count the lines of code (LOC) in git commits. It can help you measure the productivity and quality of your code, as well as track the changes over time. You can use Count-Loc to count the total LOC, the inserted LOC, the deleted LOC, and the average LOC per number of commits in daterange.
 
 ## Features
@@ -35,8 +37,8 @@ it should return something like this
 ```text
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
-Alias           Count-Loc                                          1.0.6      count-loc
-Function        Measure-Loc                                        1.0.6      count-loc
+Alias           Count-Loc                                          1.0.7      count-loc
+Function        Measure-Loc                                        1.0.7      count-loc
 ```
 
 To update Count-Loc to the latest version, run the following command:
