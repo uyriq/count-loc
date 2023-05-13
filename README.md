@@ -37,8 +37,8 @@ it should return something like this
 ```text
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
-Alias           Count-Loc                                          1.0.7      count-loc
-Function        Measure-Loc                                        1.0.7      count-loc
+Alias           Count-Loc                                          1.0.8      count-loc
+Function        Measure-Loc                                        1.0.8      count-loc
 ```
 
 To update Count-Loc to the latest version, run the following command:
