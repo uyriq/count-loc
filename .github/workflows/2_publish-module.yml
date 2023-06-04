@@ -18,4 +18,6 @@ jobs:
         run: |
           cd count-loc;
           pwd;
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-PackageProvider -Name PowerShellGet -Force -Scope CurrentUser -Confirm:$false
           Publish-Module -Name "count-loc" -NuGetApiKey $env:NUGET_KEY -Verbose
