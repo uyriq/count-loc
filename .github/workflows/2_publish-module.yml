@@ -16,4 +16,6 @@ jobs:
           NUGET_KEY: ${{ secrets.NUGET_KEY }}
         shell: pwsh
         run: |
+          cd count-loc;
+          pwd;
           Publish-Module -Name "count-loc" -NuGetApiKey $env:NUGET_KEY -Verbose
