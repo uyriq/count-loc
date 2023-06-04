@@ -16,8 +16,7 @@ jobs:
           NUGET_KEY: ${{ secrets.NUGET_KEY }}
         shell: pwsh
         run: |
-          cd count-loc;
-          pwd;
+          pwd
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-PackageProvider -Name PowerShellGet -Force -Scope CurrentUser -Confirm:$false
+          Install-Module -Name count-loc -Force -Scope CurrentUser -Confirm:$false
           Publish-Module -Name "count-loc" -NuGetApiKey $env:NUGET_KEY -Verbose
