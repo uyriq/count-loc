@@ -1,0 +1,18 @@
+name: Publish PowerShell Module
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  publish-to-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Publish to PowerShell Gallery
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        shell: pwsh
+        run: |
+          Publish-Module -Name "count-loc" -Path ./count-loc -NuGetApiKey $env:NUGET_KEY -Verbose

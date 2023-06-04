@@ -68,7 +68,9 @@ function Measure-Loc {
             parametersetname = 'DateRange'
         )]
         [Alias('h, -help')]
-        [switch]$Help
+        [switch]$Help,
+        [Alias('v, -version')]
+        [switch]$Version
     )
    
     $isWindowsOS = $env:OS -match 'Windows'
@@ -83,6 +85,19 @@ function Measure-Loc {
 
     if ($Help) { 
         Get-Help Count-Loc -Detailed | more
+        return
+    }
+
+    if ($Version) { 
+        $currentVersion = Get-Module -list -Name count-loc
+        $NormalizedCurrentVersion = "$($currentVersion.Version.Major).$($currentVersion.Version.Minor).$($currentVersion.Version.Build)" 
+        # Import-LocalizedData -BaseDirectory "." -FileName  count-loc.psd1 -BindingVariable futureVersion
+        $futureVersion = Import-PowerShellDataFile -Path $(Join-Path -Path "$PSScriptRoot" -ChildPath "count-loc.psd1")  # "$PSScriptRoot\count-loc.psd1" 
+        if ($futureVersion.ModuleVersion -eq '') { 
+            Write-Output "Count-Loc version is $($NormalizedCurrentVersion)"
+            return
+        }
+        Write-Output "Count-Loc version is $($futureVersion.ModuleVersion)"
         return
     }
 
