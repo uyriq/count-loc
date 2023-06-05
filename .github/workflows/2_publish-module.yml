@@ -21,7 +21,7 @@ jobs:
       - id: check_if_versions_bumped
         shell: pwsh
         run: |
-          [version]$GalleryVersion = (Get-Package -Name count-loc -ProviderName PowerShellGet).Version
+          [version]$GalleryVersion =  (Find-Module -Name posh-git -Repository PSGallery).Version
           [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "count-loc" -ChildPath "count-loc.psd1")).ModuleVersion
           $bumped = $GithubVersion -ge $GalleryVersion
           Write-Host "::set-output name=version_bumped::$bumped"
