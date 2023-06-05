@@ -13,7 +13,7 @@ Describe 'Measue-Loc' {
     }
     Context 'version' {
         It 'Given -version, it returns version' {
-            Measure-Loc -Version | Should -Be 'Count-Loc version is 1.0.9'
+            Measure-Loc -Version | Should -Be 'Count-Loc version is 1.0.10'
         }
     }
 }

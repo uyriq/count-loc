@@ -72,16 +72,6 @@ function Measure-Loc {
         [Alias('v, -version')]
         [switch]$Version
     )
-   
-    $isWindowsOS = $env:OS -match 'Windows'
-    $isBash = $env:SHELL -contains '/bin/bash'
-    $isGitInstalled = (Invoke-Expression "git --version") -match "git" 
-    if ($isGitInstalled -eq $false) { 
-        if ($isWindowsOS) { $url = 'https://git-scm.com/download/win' }
-        if ($isBash) { $url = 'https://git-scm.com/download/linux' }
-        Write-Output "git is not installed, please install git from $url"
-        throw "git is not installed, please install git from $url before using Count-Loc"
-    }
 
     if ($Help) { 
         Get-Help Count-Loc -Detailed | more
@@ -105,6 +95,17 @@ function Measure-Loc {
         Write-Output 'No parameters given, check possible parameters with -? or -help or Get-Help Count-Loc -Full'
         throw "must specify an author or at least one paramter, check help with -? or -help or Get-Help Count-Loc -Full"       
     }
+
+    $isWindowsOS = $env:OS -match 'Windows'
+    $isBash = $env:SHELL -contains '/bin/bash'
+    $isGitInstalled = (Invoke-Expression "git --version") -match "git" 
+    if ($isGitInstalled -eq $false) { 
+        if ($isWindowsOS) { $url = 'https://git-scm.com/download/win' }
+        if ($isBash) { $url = 'https://git-scm.com/download/linux' }
+        Write-Output "git is not installed, please install git from $url"
+        throw "git is not installed, please install git from $url before using Count-Loc"
+    }
+
     if ($NumberDays -eq 0 -and $Since -eq '' -and $Author -ne '') { 
         Write-Output 'defaulting to 7 days ago'
         $NumberDays = 7 
@@ -126,7 +127,22 @@ function Measure-Loc {
         }
         if ($Since -match "^\d{4}-\d{2}-\d{2}$" ) { $NumberDays = (New-TimeSpan -Start "$Since" -End "$Until" ).Days }
     }
-    
+    # only if git is installed following line will not throw an error
+    try {
+        $isGitInstalled = (Invoke-Expression "git --version") -match "git"
+    }
+    catch {
+        Write-Error "An error occurred while checking if Git is installed: $_"
+        $isGitInstalled = $false
+    }
+    $isWindowsOS = $env:OS -match 'Windows'
+    $isBash = $env:SHELL -contains '/bin/bash'
+    if ($isGitInstalled -eq $false) { 
+        if ($isWindowsOS) { $url = 'https://git-scm.com/download/win' }
+        if ($isBash) { $url = 'https://git-scm.com/download/linux' }
+        Write-Output "git is not installed, please install git from $url"
+        throw "git is not installed, please install git from $url before using Count-Loc"
+    }
     $Authors = git log --format='%an' | Sort-Object -u  |  ForEach-Object { $_.ToString().Split('\n')[0] }
     if ($ListAuthors) { 
         Write-Output "Possible authors:" $Authors

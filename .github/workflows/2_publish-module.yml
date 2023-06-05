@@ -11,31 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Install and cache PowerShell modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v5.2
         with:
           modules-to-cache: PowerShellGet
           shell: pwsh
-
-      # Import GPG key so that we can sign the commit
-      # - name: Import GPG key
-      #   id: import_gpg
-      #   uses: crazy-max/ghaction-import-gpg@v5
-      #   with:
-      #     gpg_private_key: ${{ secrets.GPGKEY }}
-      #     passphrase: ${{ secrets.GPGPASSPHRASE }}
-      #     git_user_signingkey: true
-      #     git_commit_gpgsign: true
-      #     git_config_global: true
-      #     git_tag_gpgsign: true
-      #     git_push_gpgsign: false
-      #     git_committer_name: ${{ secrets.COMMIT_NAME }}
-      #     git_committer_email: ${{ secrets.COMMIT_EMAIL }}
-
       # Push the updated module to the PowerShell Gallery
+      - id: check_if_versions_bumped
+        run: |
+          [version]$GalleryVersion = (Get-Package -Name count-loc -ProviderName PowerShellGet).Version -ErrorAction Stop
+          [version]$GithubVersion = Get-MetaData -Path ./count-loc/count-loc.psd1 -PropertyName ModuleVersion -ErrorAction Stop
+          $bumped = $GithubVersion -ge $GalleryVersion
+          Write-Host "::set-output name=version_bumped::$bumped"
+      # Set the output named "version_bumped"
       - name: Push module to PowerShell Gallery
+        if: steps.check_if_versions_bumped.outputs.version_bumped == 'True'
         shell: pwsh
         run: |
           $params = @{
