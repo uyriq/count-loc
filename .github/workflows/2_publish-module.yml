@@ -19,6 +19,7 @@ jobs:
           shell: pwsh
       # Push the updated module to the PowerShell Gallery
       - id: check_if_versions_bumped
+        shell: pwsh
         run: |
           [version]$GalleryVersion = (Get-Package -Name count-loc -ProviderName PowerShellGet).Version
           [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "count-loc" -ChildPath "count-loc.psd1")).ModuleVersion
