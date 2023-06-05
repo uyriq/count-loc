@@ -20,8 +20,8 @@ jobs:
       # Push the updated module to the PowerShell Gallery
       - id: check_if_versions_bumped
         run: |
-          [version]$GalleryVersion = (Get-Package -Name count-loc -ProviderName PowerShellGet).Version -ErrorAction Stop
-          [version]$GithubVersion = Get-MetaData -Path ./count-loc/count-loc.psd1 -PropertyName ModuleVersion -ErrorAction Stop
+          [version]$GalleryVersion = (Get-Package -Name count-loc -ProviderName PowerShellGet).Version
+          [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "count-loc" -ChildPath "count-loc.psd1")).ModuleVersion
           $bumped = $GithubVersion -ge $GalleryVersion
           Write-Host "::set-output name=version_bumped::$bumped"
       # Set the output named "version_bumped"
