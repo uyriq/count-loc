@@ -3,6 +3,7 @@
 ![PowerShell Gallery](https://img.shields.io/powershellgallery/p/count-loc.svg)
 [![Pester](https://github.com/uyriq/count-loc/actions/workflows/1_pester-test.yml/badge.svg)](https://github.com/uyriq/count-loc/actions/workflows/1_pester-test.yml)
 [![Published](https://github.com/uyriq/count-loc/actions/workflows/2_publish-module.yml/badge.svg)](https://github.com/uyriq/count-loc/actions/workflows/2_publish-module.yml)
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/count-loc.svg)](https://www.powershellgallery.com/packages/count-loc)
 
 Count-Loc is a PowerShell module that uses the git stat command to count the lines of code (LOC) in git commits. It can help you measure the productivity and quality of your code, as well as track the changes over time. You can use Count-Loc to count the total LOC, the inserted LOC, the deleted LOC, and the average LOC per number of commits in daterange.
 

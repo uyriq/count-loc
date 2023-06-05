@@ -22,7 +22,7 @@ jobs:
         shell: pwsh
         run: |
           [version]$GalleryVersion =  (Find-Module -Name count-loc -Repository PSGallery).Version
-          [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "count-loc" -ChildPath "count-loc.psd1")).ModuleVersion
+          [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "${{ github.workspace }}" -ChildPath "count-loc/count-loc.psd1")).ModuleVersion
           $bumped = $GithubVersion -ge $GalleryVersion
           Write-Host "::set-output name=version_bumped::$bumped"
       # Set the output named "version_bumped"
