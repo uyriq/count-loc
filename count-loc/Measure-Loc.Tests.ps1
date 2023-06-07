@@ -12,8 +12,11 @@ Describe 'Measue-Loc' {
         }
     }
     Context 'version' {
+        
         It 'Given -version, it returns version' {
-            Measure-Loc -Version | Should -Be 'Count-Loc version is 1.0.10'
+            $currentVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "$PSScriptRoot" -ChildPath "count-loc.psd1")).ModuleVersion 
+            # Write-Output "current version is $($currentVersion)"
+            Measure-Loc -Version | Should -Be "Your Count-Loc version is $($currentVersion) is up to date with powershellgallery"
         }
     }
 }
