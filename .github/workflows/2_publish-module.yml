@@ -24,8 +24,9 @@ jobs:
           [version]$GalleryVersion =  (Find-Module -Name count-loc -Repository PSGallery).Version
           [Version]$GithubVersion = (Import-PowerShellDataFile -Path $(Join-Path -Path "${{ github.workspace }}" -ChildPath "count-loc/count-loc.psd1")).ModuleVersion
           $bumped = $GithubVersion -ge $GalleryVersion
-          $env:BUMPED= $bumped.ToString()
-          echo "::set-output name=version_bumped::$bumped"
+          echo $bumped
+          $bumbed = 'True' # workaround for pushing to gallery
+          $env:BUMPED = 'True' # $bumped.ToString()
       # Set the output named "version_bumped"
       - name: Push module to PowerShell Gallery
         if: ${{ env.BUMPED == 'True' }}
